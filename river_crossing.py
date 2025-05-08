@@ -25,14 +25,11 @@ def solve(N: int, coords: List[Tuple[int, int]]) -> int:
         assert len(c) == 2, f"Every boat should have two coordinates. Instead, boat {i + 1} has {len(c)} elements."
 
     # TODO: Your code here
-
     boats = sorted(coords, key=lambda x: (x[0]))
-    y = [y for _, y in boats]
-    # x is the starting bank coordinate, y is the ending bank coordinate
     dp = [1] * N
     for i in range(1, N):
         for j in range(i):
-            if y[i] > y[j]:
+            if boats[i][1] > boats[j][1]:
                 dp[i] = max(dp[i], dp[j] + 1)
     # Return an int (number of boats)
     return max(dp)
